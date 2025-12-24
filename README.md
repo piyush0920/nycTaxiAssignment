@@ -27,7 +27,7 @@ This repository showcases:
 
 ## 🗂️ Dataset
 
-* **Source:** NYC Yellow Taxi Trip Records
+* **Source:** NYC Yellow Taxi Trip Records (I have only used data from year 2023)
 * **Format:** Monthly CSV files
 * **Size:** Very large (sampled for performance)
 * **Key Features:**
