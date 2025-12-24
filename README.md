@@ -29,7 +29,7 @@ This repository showcases:
 
 * **Source:** NYC Yellow Taxi Trip Records (I have only used data from year 2023)
 
-* **Link**
+* **Link:**
 The dataset is available from the [NYC Taxi & Limousine Commission][tlc-link].
 
 [tlc-link]: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
