@@ -175,9 +175,3 @@ Aspiring Data Analyst | Python | EDA | Business Analytics
 📫 *Open to data analyst and analytics roles*
 
 ---
-
-If you want, I can:
-
-* Rewrite this README in a **more technical** or **more business-focused** tone
-* Add **badges**, **screenshots**, or **dashboard links**
-* Help you write a **GitHub project description** or **LinkedIn post** for this capstone
