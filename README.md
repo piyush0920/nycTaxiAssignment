@@ -1,177 +1,119 @@
-# 🚕 NYC Yellow Taxi Operations – Exploratory Data Analysis (Assignment)
+# NYC Yellow Taxi Operations Analysis
 
-## 📌 Project Overview
+An exploratory analytics project using **2023 NYC Yellow Taxi trip records** to understand demand patterns, trip economics, geographic activity, and operational opportunities. The analysis combines data preparation, exploratory analysis, and geospatial visualization to develop recommendations for taxi operations.
 
-This project is an **end-to-end Exploratory Data Analysis (EDA)** of NYC Yellow Taxi trip data, created as a **Assignment** to demonstrate practical data analysis, data cleaning, and insight generation skills using Python.
+## Project objectives
 
-The objective is to understand **travel demand patterns, revenue trends, operational inefficiencies, and geographic hotspots**, and to provide **data-driven recommendations** for optimizing taxi operations in New York City.
+- Identify demand patterns across hours, weekdays, months, and pickup/drop-off zones.
+- Examine fares, tips, trip distance, passenger counts, payment types, and vendor patterns.
+- Explore pickup and drop-off hotspots and zone imbalances.
+- Investigate route-speed and time-of-day patterns.
+- Translate the analysis into operational recommendations for dispatching and fleet positioning.
 
-This repository showcases:
+## Data
 
-* Real-world data preparation techniques
-* Structured EDA methodology
-* Time-based and geospatial analysis
-* Business-focused insights and recommendations
+**Source:** [NYC Taxi & Limousine Commission — Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
 
----
+The notebook uses monthly Yellow Taxi CSV records from **2023** and samples the data to keep the analysis computationally manageable. It also uses NYC taxi-zone geographic reference data for spatial analysis.
 
-## 🎯 Objectives
+The raw trip CSVs and zone shapefile are not included in this repository. Download the relevant 2023 Yellow Taxi files and the matching Taxi Zone lookup/shapefile from the TLC source, then update the notebook paths before execution.
 
-* Clean and prepare large-scale real-world taxi data
-* Identify demand patterns across **hours, days, months, and zones**
-* Analyze **fare, tips, passenger behavior, and vendor patterns**
-* Detect congestion-prone routes and operational inefficiencies
-* Provide **actionable recommendations** for routing, dispatching, and pricing
+Relevant fields include pickup and drop-off timestamps, trip distance, fare components, tips, passenger count, payment type, vendor, and pickup/drop-off zone identifiers.
 
----
+## Methodology
 
-## 🗂️ Dataset
+### 1. Data preparation
 
-* **Source:** NYC Yellow Taxi Trip Records (I have only used data from year 2023)
+- Load multiple monthly CSV files.
+- Apply a fixed sampling approach and random seed to manage data volume.
+- Combine the sampled monthly records.
+- Parse timestamp columns and standardize column names and data types.
 
-* **Link:**
-The dataset is available from the [NYC Taxi & Limousine Commission][tlc-link].
+### 2. Data cleaning
 
-[tlc-link]: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
-* **Format:** Monthly CSV files
-* **Size:** Very large (sampled for performance)
-* **Key Features:**
+- Reconcile duplicate or split fare fields, including airport fees.
+- Handle missing values using domain-informed rules.
+- Remove invalid records such as negative fares, distances, or tips.
+- Review outliers and inconsistent trip records.
 
-  * Pickup & dropoff timestamps
-  * Trip distance & duration
-  * Fare components & tips
-  * Passenger count
-  * Pickup & dropoff zones
+### 3. Exploratory analysis
 
-> A fixed sampling fraction and random state were used to maintain reproducibility while keeping the dataset computationally manageable.
+- Hourly, weekday, monthly, and quarterly demand patterns.
+- Fare, distance, trip duration, and tip relationships.
+- Passenger-count, payment-type, and vendor comparisons.
+- Revenue contribution and night-time activity.
 
----
+### 4. Geospatial analysis
 
-## 🧰 Tools & Technologies
+- Join trip zone identifiers to NYC Taxi Zone reference data.
+- Map pickup and drop-off volumes.
+- Identify high-activity zones and pickup/drop-off imbalances.
+- Compare route and time-of-day patterns using average speed.
 
-* **Python**
-* **Pandas** – data manipulation
-* **NumPy** – numerical operations
-* **Matplotlib / Seaborn** – visualizations
-* **GeoPandas** – spatial analysis
-* **Jupyter Notebook** – analysis workflow
+## Findings recorded in the analysis
 
----
+- Demand varies across both the day and the week, with elevated activity around commute periods.
+- Activity is concentrated in a subset of pickup and drop-off zones.
+- Payment type, fare, distance, and vendor patterns provide additional context for operational analysis.
+- Differences between pickup-heavy and drop-off-heavy zones suggest opportunities for fleet rebalancing.
+- Night-time activity and airport/transit-related demand are useful dimensions for operational planning.
 
-## 🔧 Methodology
+These observations are descriptive findings from the sampled 2023 records; they should not be interpreted as causal or as citywide estimates without checking the sampling design and representativeness.
 
-### 1. Data Preparation
+## Business recommendations
 
-* Loaded multiple monthly CSV files
-* Parsed datetime columns for time-based analysis
-* Sampled and combined datasets
-* Standardized column names and data types
-* Reset and cleaned indexes
+- Position more vehicles near consistently high-demand zones and during observed peak periods.
+- Rebalance vehicles from drop-off-heavy areas toward zones with persistent pickup demand.
+- Review slow routes and trip-time patterns when designing dispatch strategies.
+- Plan night-time coverage around observed demand hubs.
+- Evaluate fare-per-mile and trip-duration patterns before making pricing changes.
 
-### 2. Data Cleaning
+## Tools and technologies
 
-* Combined duplicate columns (e.g., airport fees)
-* Handled missing values using domain-driven assumptions
-* Removed invalid records (negative fares, distances, tips)
-* Corrected common data entry issues
+| Area | Tools |
+|---|---|
+| Data manipulation | Python, pandas, NumPy |
+| Visualization | Matplotlib, Seaborn |
+| Spatial analysis | GeoPandas |
+| Workflow | Jupyter Notebook |
 
-### 3. Exploratory Data Analysis
+## Repository contents
 
-* Time-based demand analysis (hourly, daily, monthly trends)
-* Revenue and quarterly contribution analysis
-* Fare vs distance and tip behavior analysis
-* Passenger count and payment type patterns
-* Vendor-wise fare comparisons
-
-### 4. Geospatial Analysis
-
-* Integrated NYC taxi zone shapefiles
-* Identified high-traffic pickup & dropoff zones
-* Mapped spatial demand hotspots
-* Analyzed pickup-to-dropoff imbalance
-
-### 5. Advanced Insights
-
-* Identified slow and congested routes using average speeds
-* Compared weekday vs weekend traffic
-* Analyzed night-time demand and revenue contribution
-* Studied fare-per-mile patterns by time and vendor
-
----
-
-## 📊 Key Insights
-
-* Taxi demand follows **strong daily and weekly patterns**
-* Peak activity occurs during **morning and evening commute hours**
-* Certain zones consistently act as **high-demand hotspots**
-* Credit card payments dominate both trips and revenue
-* Night-time trips contribute a significant share of revenue
-* Some zones experience consistent **pickup-dropoff imbalance**, indicating fleet rebalancing needs
-
----
-
-## 📈 Business Recommendations
-
-* Increase fleet availability during peak hours and high-demand zones
-* Rebalance vehicles between pickup-heavy and dropoff-heavy zones
-* Adjust routing strategies for consistently slow routes
-* Support night-time demand around airports and transit hubs
-* Use tiered pricing strategies for short vs long trips
-
----
-
-## 📁 Repository Structure
-
-```
-├── EDA_Assg_NYC_Taxi_Starter_piyush_sharma.ipynb
-├── Report_NYC_Taxi_Operations.pdf / .docx
-├── README.md
+```text
+.
+├── EDA_Assg_NYC_Taxi_piyush_sharma.ipynb
+├── Report_NYC_Taxi_Operations_piyush_sharma.pdf
+└── README.md
 ```
 
----
+- [Open the analysis notebook](./EDA_Assg_NYC_Taxi_piyush_sharma.ipynb)
+- [Open the project report](./Report_NYC_Taxi_Operations_piyush_sharma.pdf)
 
-## 📄 Project Report
+## How to run
 
-A detailed report explaining methodology, analysis, visualizations, insights, and recommendations is included in this repository.
+Clone the repository:
 
+```bash
+git clone https://github.com/piyush0920/nycTaxiAssignment.git
+cd nycTaxiAssignment
+```
 
----
+Install the main dependencies:
 
-## 🚀 Future Improvements & Extension Ideas
+```bash
+pip install pandas numpy matplotlib seaborn geopandas jupyter
+```
 
-If you want to enhance this project further, consider:
+Download the 2023 TLC Yellow Taxi CSV files and the matching taxi-zone geographic reference files. Update the input paths in the notebook, then run the cells in order.
 
-1. **PySpark Version**
+## Limitations and next steps
 
-   * Rebuild the analysis using PySpark for big data scalability
+- Results depend on the chosen sampling fraction and random seed.
+- The raw CSV files and geospatial reference files are external inputs and are not committed.
+- The analysis is descriptive; a predictive demand model or dispatch simulation would be a separate extension.
+- Zone-level comparisons should account for sample coverage and the geographic context of each zone.
 
-2. **Predictive Modeling**
+## Author
 
-   * Predict demand by hour or zone using regression or time-series models
-
-3. **Dashboard**
-
-   * Create an interactive dashboard using Power BI / Tableau / Streamlit
-
-4. **Clustering**
-
-   * Cluster zones based on demand and revenue patterns
-
-5. **Real-Time Simulation**
-
-   * Simulate taxi allocation strategies based on historical demand
-
-6. **Cost Optimization**
-
-   * Analyze fuel/time cost vs revenue to improve profitability
-
----
-
-## 👤 Author
-
-**Piyush Sharma**
-Aspiring Data Analyst | Python | EDA | Business Analytics
-
-📫 *Open to data analyst and analytics roles*
-
----
+**Piyush Sharma**  
+[GitHub](https://github.com/piyush0920) · [Portfolio](https://piyush0920.github.io/) · [LinkedIn](https://linkedin.com/in/piyush-sharma-6591171ba)
